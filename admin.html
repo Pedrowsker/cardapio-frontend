@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Painel Administrativo - Café Fernandes</h1>
+</header>
+
+<main class="admin">
+
+  <section class="card">
+    <h2>Nova Categoria</h2>
+    <input id="cat" placeholder="Nome da categoria">
+    <button onclick="addCategory()">Adicionar</button>
+  </section>
+
+  <section class="card">
+    <h2>Novo Produto</h2>
+    <input id="name" placeholder="Nome do produto">
+    <input id="desc" placeholder="Descrição">
+    <input id="price" placeholder="Preço">
+    <select id="category"></select>
+    <button onclick="addProduct()">Adicionar</button>
+  </section>
+
+  <div id="menu"></div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
