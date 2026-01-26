@@ -1,0 +1,21 @@
+body {
+  font-family: Arial;
+  margin: 0;
+  padding: 15px;
+  background: #ff0000;
+}
+
+h1 {
+  text-align: center;
+}
+
+.category {
+  margin-top: 20px;
+}
+
+.product {
+  background: white;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+}
