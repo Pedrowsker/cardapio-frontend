@@ -1,10 +1,11 @@
 :root {
-  --brown-dark: #4b2e2e;
+  --brown-dark: #351f1f;
   --brown: #7a4a2e;
   --brown-light: #c4a484;
-  --bg: #ff0000;
+  --bg: #ffffff;
   --bg-soft: #f7f5f3;
   --border: #e6e1dc;
+  --bt: #493131;
 }
 
 * {
@@ -19,11 +20,13 @@ body {
 }
 
 header {
-  background: var(--bg);
+  background: var(--brown); /* marrom escuro */
+  color: white; /* texto branco para contraste */
   border-bottom: 1px solid var(--border);
   padding: 25px;
   text-align: center;
 }
+
 
 h1 {
   margin: 0;
@@ -76,7 +79,8 @@ main {
 }
 
 .card {
-  background: var(--bg);
+  background: var(--brown); /* marrom escuro */
+  color: white; /* texto branco */
   border-radius: 16px;
   padding: 20px;
   border: 1px solid var(--border);
@@ -86,7 +90,9 @@ main {
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 1.2rem;
+  color: white; /* garante que o título apareça */
 }
+
 
 input,
 select {
@@ -96,6 +102,8 @@ select {
   border-radius: 10px;
   border: 1px solid var(--border);
   font-size: 0.95rem;
+  background: var(--bg-soft); /* mantém inputs claros dentro do card escuro */
+  color: var(--brown-dark);   /* texto escuro dentro dos inputs */
 }
 
 input:focus,
@@ -107,7 +115,7 @@ select:focus {
 button {
   width: 100%;
   padding: 12px;
-  background: var(--brown);
+  background: var(--brown-dark);
   color: white;
   border: none;
   border-radius: 12px;
@@ -117,7 +125,7 @@ button {
 }
 
 button:hover {
-  background: var(--brown-dark);
+  background: var(--bt);
   transform: translateY(-1px);
 }
 
