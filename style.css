@@ -169,7 +169,7 @@ main {
 .product-name {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;         /* Mudamos para normal para ganhar peso visual */
-  font-size: 1.6rem;          /* Aumentamos levemente o tamanho */
+  font-size: 1.7rem;          /* Aumentamos levemente o tamanho */
   font-weight: 700;           /* Peso máximo da Cormorant */
   color: var(--primary);
   line-height: 1.1;
@@ -192,7 +192,7 @@ main {
 
 .product-desc {
   font-family: 'Lato', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 300;
   color: var(--text-light);
   margin-top: 4px;
