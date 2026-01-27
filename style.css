@@ -9,7 +9,7 @@
   --text-main: #3E2723;
   --text-light: #795548;
   
-  --shadow-sm: 0 2px 8px rgba(93, 64, 55, 0.08);
+  --shadow-sm: 0 2px 8px rgba(93, 64, 55, 0.36);
   --shadow-md: 0 8px 24px rgba(93, 64, 55, 0.12);
   --radius: 16px;           /* Arredondamento mais moderno */
 }
@@ -30,29 +30,63 @@ body {
 }
 
 /* ===== CABEÇALHO ===== */
+/* ===== AJUSTE DO HEADER PARA LOGO ===== */
 header {
-  background: var(--bg-card);
-  padding: 1.5rem 1rem;
-  text-align: center;
+  background: var(--primary);
+  padding: 1rem 1.5rem; /* Reduzi um pouco o padding vertical */
   box-shadow: var(--shadow-sm);
-  position: sticky; /* O menu fica fixo no topo ao rolar? Opcional. Se não quiser, tire sticky e top */
+  position: sticky;
   top: 0;
   z-index: 100;
   border-bottom: 3px solid var(--primary);
 }
 
+.header-content {
+  max-width: 1000px; /* Alinha com a largura do 'main' */
+  margin: 0 auto;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente logo e texto */
+  gap: 20px;           /* Espaço entre a logo e o texto */
+}
+
+.logo {
+  height: 60px;        /* Altura da logo - ajuste conforme necessário */
+  width: auto;         /* Mantém a proporção */
+  object-fit: contain;
+  border-radius: 8px;  /* Opcional: arredonda cantos da logo se for quadrada */
+}
+
+.header-text {
+  text-align: left;    /* Garante que o texto fique alinhado à esquerda */
+}
+
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem; /* Levemente menor para caber em cel */
-  color: var(--primary);
-  font-weight: 700;
-  letter-spacing: -0.5px;
+  font-size: 1.8rem;   /* Reduzi um pouco para não brigar com a logo */
+  color: var(--bg-card);
+  margin: 0;
+  line-height: 1.1;
 }
 
 header p {
+  margin: 0;
+  font-size: 0.85rem;
   color: var(--text-light);
-  font-size: 0.9rem;
-  margin-top: 5px;
+}
+
+/* Ajuste para Celulares */
+@media (max-width: 600px) {
+  .header-content {
+    gap: 12px;
+  }
+  
+  .logo {
+    height: 50px;      /* Logo um pouco menor no celular */
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
 }
 
 /* ===== LAYOUT GERAL ===== */
@@ -63,19 +97,43 @@ main {
 }
 
 /* ===== CATEGORIAS ===== */
+/* ===== CATEGORIAS ===== */
 .category-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.5rem; /* Mais espaço entre uma categoria e outra */
+  position: relative;
 }
 
 .category-title {
+  /* Design de Banner */
+  background: var(--primary);  /* Fundo Marrom Café */
+  color: #FFFFFF;              /* Texto Branco para contraste total */
+  
+  /* Tipografia */
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  color: var(--primary);
-  border-left: 4px solid var(--secondary);
-  padding-left: 12px;
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
+  font-size: 1.5rem;           /* Tamanho grande */
+  font-weight: 700;            /* Negrito */
+  letter-spacing: 1.5px;       /* Espaçamento chique entre letras */
+  text-transform: uppercase;   /* Caixa alta para impor respeito */
+  text-align: center;          /* Centralizado */
+  
+  /* Espaçamento e Borda */
+  padding: 12px 20px;
+  border-radius: 4px;          /* Cantos levemente arredondados */
+  margin-bottom: 25px;         /* Espaço entre o título e os produtos */
+  
+  /* Sombra para dar profundidade (3D sutil) */
+  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.4);
+  
+  /* Detalhe visual opcional: Borda dourada/bege embaixo */
+  border-bottom: 3px solid var(--accent);
+}
+
+/* Ajuste para telas menores (Celular) */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 1.3rem; /* Um pouco menor no celular para não quebrar */
+    padding: 10px;
+  }
 }
 
 /* ===== GRID DE PRODUTOS ===== */
