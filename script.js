@@ -39,16 +39,12 @@ function render(data) {
   menu.innerHTML = "";
 
   data.categories.forEach(c => {
-    const categoryDiv = document.createElement("div");
-    categoryDiv.className = "category";
+    const card = document.createElement("div");
+    card.className = "category-card";
 
     const header = document.createElement("div");
     header.className = "category-header";
-
-    header.innerHTML = `
-      <h2>${c.name}</h2>
-      ${ADMIN_KEY ? `<button class="delete-btn" onclick="deleteCategory(${c.id})">Excluir</button>` : ""}
-    `;
+    header.textContent = c.name;
 
     const productsDiv = document.createElement("div");
     productsDiv.className = "products";
@@ -58,39 +54,33 @@ function render(data) {
       .forEach(p => {
         const prod = document.createElement("div");
         prod.className = "product";
-
         prod.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <b>${p.name}</b><br>
-              ${p.description || ""}<br>
-              R$ ${Number(p.price).toFixed(2).replace(".", ",")}
-            </div>
-            ${ADMIN_KEY ? `<button class="delete-btn" onclick="deleteProduct(${p.id})">X</button>` : ""}
-          </div>
+          <b>${p.name}</b><br>
+          ${p.description || ""}<br>
+          R$ ${Number(p.price).toFixed(2).replace(".", ",")}
         `;
-
         productsDiv.appendChild(prod);
       });
 
-    // abre/fecha ao clicar na categoria
     header.addEventListener("click", () => {
-      const isOpen = productsDiv.style.display === "block";
-      productsDiv.style.display = isOpen ? "none" : "block";
+      card.classList.toggle("open");
     });
 
-    categoryDiv.appendChild(header);
-    categoryDiv.appendChild(productsDiv);
-    menu.appendChild(categoryDiv);
+    card.appendChild(header);
+    card.appendChild(productsDiv);
+    menu.appendChild(card);
   });
 
   if (categorySelect) {
     categorySelect.innerHTML = `
       <option value="">Selecione uma categoria</option>
-      ${data.categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("")}
+      ${data.categories.map(c =>
+        `<option value="${c.id}">${c.name}</option>`
+      ).join("")}
     `;
   }
 }
+
 
 
 
