@@ -1,105 +1,84 @@
 const API = "https://cardapio-backend-cytu.onrender.com";
 const ADMIN_KEY = new URLSearchParams(window.location.search).get("admin");
 
-/* ---------- ELEMENTOS ---------- */
+// ELEMENTOS DO ADMIN
 const cat = document.getElementById("cat");
 const nameInput = document.getElementById("name");
 const descInput = document.getElementById("desc");
 const priceInput = document.getElementById("price");
 const categorySelect = document.getElementById("category");
 
-/* ---------- FORMATAÇÃO DO PREÇO ---------- */
+// ---------- FORMATAÇÃO DO PREÇO ----------
 if (priceInput) {
   priceInput.addEventListener("input", () => {
     let value = priceInput.value.replace(/\D/g, "");
-    if (!value) return (priceInput.value = "");
+
+    if (!value) {
+      priceInput.value = "";
+      return;
+    }
+
     value = (Number(value) / 100).toFixed(2);
     priceInput.value = value.replace(".", ",");
   });
 }
 
-/* ---------- CARREGAR MENU ---------- */
+// ---------- CARREGAR MENU ----------
 async function loadMenu() {
-  try {
-    const res = await fetch(`${API}/menu`);
-    if (!res.ok) throw new Error();
-    const data = await res.json();
-    render(data);
-  } catch {
+  const res = await fetch(`${API}/menu`);
+  if (!res.ok) {
     console.error("Erro ao carregar menu");
+    return;
   }
+  const data = await res.json();
+  render(data);
 }
 
-/* ---------- RENDER ---------- */
+// ---------- RENDER ----------
 function render(data) {
   const menu = document.getElementById("menu");
-  if (!menu) return;
 
-  menu.innerHTML = "";
-  const isAdmin = ADMIN_KEY === "admin123";
+  if (menu) {
+    menu.innerHTML = "";
 
-  (data.categories || []).forEach(c => {
-    const card = document.createElement("div");
-    card.className = "category-card";
+    data.categories.forEach(c => {
+      const div = document.createElement("div");
+      div.className = "category";
+      div.innerHTML = `<h2>${c.name}</h2>`;
 
-    const header = document.createElement("div");
-    header.className = "category-header";
-    header.innerHTML = `
-      <span>${c.name}</span>
-      ${isAdmin ? `<button class="delete-btn" onclick="deleteCategory(${c.id})">🗑</button>` : ""}
-    `;
+      data.products
+        .filter(p => p.category_id === c.id)
+        .forEach(p => {
+          div.innerHTML += `
+            <div class="product">
+              <b>${p.name}</b><br>
+              ${p.description || ""}<br>
+              R$ ${Number(p.price).toFixed(2).replace(".", ",")}
+            </div>
+          `;
+        });
 
-    const productsDiv = document.createElement("div");
-    productsDiv.className = "products";
-
-    (data.products || [])
-      .filter(p => Number(p.category_id) === Number(c.id))
-      .forEach(p => {
-        const prod = document.createElement("div");
-        prod.className = "product";
-        prod.innerHTML = `
-          <div>
-            <b>${p.name}</b><br>
-            ${p.description || ""}
-          </div>
-          <span class="price">R$ ${Number(p.price).toFixed(2).replace(".", ",")}</span>
-          ${isAdmin ? `<button class="delete-btn" onclick="deleteProduct(${p.id})">🗑</button>` : ""}
-        `;
-        productsDiv.appendChild(prod);
-      });
-
-    header.addEventListener("click", e => {
-      if (e.target.tagName === "BUTTON") return;
-
-      const open = card.classList.contains("open");
-
-      document.querySelectorAll(".products").forEach(el => el.style.height = "0px");
-      document.querySelectorAll(".category-card").forEach(el => el.classList.remove("open"));
-
-      if (!open) {
-        card.classList.add("open");
-        productsDiv.style.height = productsDiv.scrollHeight + "px";
-      }
+      menu.appendChild(div);
     });
+  }
 
-    card.appendChild(header);
-    card.appendChild(productsDiv);
-    menu.appendChild(card);
-  });
-
+  // SELECT DO ADMIN
   if (categorySelect) {
     categorySelect.innerHTML = `
       <option value="">Selecione uma categoria</option>
-      ${(data.categories || [])
+      ${data.categories
         .map(c => `<option value="${c.id}">${c.name}</option>`)
         .join("")}
     `;
   }
 }
 
-/* ---------- ADICIONAR CATEGORIA ---------- */
+// ---------- ADICIONAR CATEGORIA ----------
 async function addCategory() {
-  if (!cat.value.trim()) return alert("Digite o nome da categoria");
+  if (!cat.value.trim()) {
+    alert("Digite o nome da categoria");
+    return;
+  }
 
   await fetch(`${API}/category?admin=${ADMIN_KEY}`, {
     method: "POST",
@@ -111,12 +90,21 @@ async function addCategory() {
   loadMenu();
 }
 
-/* ---------- ADICIONAR PRODUTO ---------- */
+// ---------- ADICIONAR PRODUTO ----------
 async function addProduct() {
-  if (!nameInput.value || !priceInput.value || !categorySelect.value)
-    return alert("Preencha os campos obrigatórios");
+  if (
+    !nameInput.value.trim() ||
+    !priceInput.value ||
+    !categorySelect.value
+  ) {
+    alert("Preencha todos os campos obrigatórios");
+    return;
+  }
 
-  const formattedPrice = Number(priceInput.value.replace(",", "."));
+  // converte 12,34 -> 12.34
+  const formattedPrice = Number(
+    priceInput.value.replace(",", ".")
+  );
 
   await fetch(`${API}/product?admin=${ADMIN_KEY}`, {
     method: "POST",
@@ -137,28 +125,5 @@ async function addProduct() {
   loadMenu();
 }
 
-/* ---------- EXCLUIR PRODUTO ---------- */
-async function deleteProduct(id) {
-  if (!confirm("Excluir este produto?")) return;
-
-  await fetch(`${API}/product/${id}?admin=${ADMIN_KEY}`, {
-    method: "DELETE"
-  });
-
-  loadMenu();
-}
-
-/* ---------- EXCLUIR CATEGORIA ---------- */
-async function deleteCategory(id) {
-  if (!confirm("Excluir esta categoria e seus produtos?")) return;
-
-  await fetch(`${API}/category/${id}?admin=${ADMIN_KEY}`, {
-    method: "DELETE"
-  });
-
-  loadMenu();
-}
-
-/* ---------- AUTO ATUALIZAÇÃO ---------- */
+// ---------- INIT ----------
 loadMenu();
-setInterval(loadMenu, 5000);
