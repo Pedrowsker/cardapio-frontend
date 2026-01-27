@@ -37,72 +37,95 @@ main {
   padding: 0 20px;
 }
 
-/* ===== CARD CATEGORIA (ACCORDION) ===== */
+/* ===== CARD CATEGORIA (ACCORDION MODERNO) ===== */
 
 .category-card {
-  background: var(--bg);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  margin-bottom: 18px;
+  background: linear-gradient(145deg, #ffffff, #ff0000);
+  border-radius: 10px;              /* menos arredondado */
+  border: 1px solid #e2dbd3;
+  margin-bottom: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
+/* cabeçalho da categoria */
 .category-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 18px;
+  padding: 18px 20px;
   cursor: pointer;
-  user-select: none;
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.3px;
+  background: linear-gradient(90deg, var(--brown), #5a3521);
+  color: white;
+  transition: background 0.25s ease;
 }
 
 .category-header:hover {
-  background: var(--bg-soft);
+  background: linear-gradient(90deg, #5a3521, var(--brown));
 }
 
+/* SETA GRANDE */
+/* remove a seta antiga */
 .category-header::after {
-  content: "▾";
-  font-size: 1rem;
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);   /* forma a seta */
   transition: transform 0.3s ease;
+  margin-left: 10px;
 }
 
+/* quando abre, gira pra cima */
 .category-card.open .category-header::after {
-  transform: rotate(180deg);
+  transform: rotate(-135deg);
 }
 
-/* área dos produtos — AQUI É O PULO DO GATO */
+
+/* área dos produtos */
 .products {
   height: 0;
   overflow: hidden;
   transition: height 0.35s ease;
-  padding: 0 18px;
+  padding: 0 20px;
+  background: #faf8f5;
 }
 
-/* produto */
+/* ===== PRODUTO MAIS SOFISTICADO ===== */
+
 .product {
-  background: var(--bg-soft);
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  margin-top: 10px;
-  font-size: 0.95rem;
+  background: white;
+  border-left: 4px solid var(--brown);   /* detalhe lateral */
+  padding: 14px 16px;
+  margin: 14px 0;
+  border-radius: 6px;                    /* formato mais retangular */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.product:hover {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  transform: translateX(2px);
 }
 
 .product b {
   font-size: 1.05rem;
+  color: var(--brown-dark);
 }
 
 .product span.price {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--brown);
-  white-space: nowrap;
+  font-size: 1rem;
 }
+
+
 
 /* ===== ADMIN ===== */
 
@@ -150,18 +173,42 @@ button:hover {
   transform: translateY(-1px);
 }
 
+/* botão excluir discreto */
 .delete-btn {
-  background: #b3261e;
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  width: auto;
+  background: #9e2a2a;
+  border-radius: 6px;
+  padding: 3px 7px;
+  font-size: 0.7rem;
+  margin-left: 10px;
 }
 
-.delete-btn:hover { background: #8c1d18; }
+.delete-btn:hover {
+  background: #7c1f1f;
+}
 
 /* ===== RESPONSIVO ===== */
 
 @media (max-width: 600px) {
   h1 { font-size: 1.8rem; }
+}
+
+.menu-intro {
+  max-width: 900px;
+  margin: 30px auto 10px;
+  padding: 0 20px;
+}
+
+.menu-intro h2 {
+  font-size: 1.6rem;
+  margin: 0;
+  color: var(--brown-dark);
+  border-left: 6px solid var(--brown);
+  padding-left: 12px;
+  letter-spacing: 0.5px;
+}
+
+.menu-intro p {
+  margin: 8px 0 0 18px;
+  font-size: 0.95rem;
+  color: #6b5a5a;
 }
