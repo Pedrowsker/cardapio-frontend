@@ -12,12 +12,10 @@ const categorySelect = document.getElementById("category");
 if (priceInput) {
   priceInput.addEventListener("input", () => {
     let value = priceInput.value.replace(/\D/g, "");
-
     if (!value) {
       priceInput.value = "";
       return;
     }
-
     value = (Number(value) / 100).toFixed(2);
     priceInput.value = value.replace(".", ",");
   });
@@ -25,16 +23,17 @@ if (priceInput) {
 
 // ---------- CARREGAR MENU ----------
 async function loadMenu() {
-  const res = await fetch(`${API}/menu`);
-  if (!res.ok) {
-    console.error("Erro ao carregar menu");
-    return;
+  try {
+    const res = await fetch(`${API}/menu`);
+    if (!res.ok) throw new Error("Erro ao carregar");
+    const data = await res.json();
+    render(data);
+  } catch (error) {
+    console.error(error);
   }
-  const data = await res.json();
-  render(data);
 }
 
-// ---------- RENDER ----------
+// ---------- RENDER (VISUAL NOVO) ----------
 function render(data) {
   const menu = document.getElementById("menu");
 
@@ -42,30 +41,45 @@ function render(data) {
     menu.innerHTML = "";
 
     data.categories.forEach(c => {
-      const div = document.createElement("div");
-      div.className = "category";
-      div.innerHTML = `<h2>${c.name}</h2>`;
+      // Cria a seção da categoria
+      const section = document.createElement("section");
+      section.className = "category-section";
+      
+      // Título da Categoria
+      section.innerHTML = `<h2 class="category-title">${c.name}</h2>`;
+
+      // Grid para os produtos
+      const grid = document.createElement("div");
+      grid.className = "products-grid";
 
       data.products
         .filter(p => p.category_id === c.id)
         .forEach(p => {
-          div.innerHTML += `
-            <div class="product">
-              <b>${p.name}</b><br>
-              ${p.description || ""}<br>
-              R$ ${Number(p.price).toFixed(2).replace(".", ",")}
+          // Card do Produto
+          const priceFormatted = Number(p.price).toFixed(2).replace(".", ",");
+          
+          grid.innerHTML += `
+            <div class="product-card">
+              <div>
+                <div class="product-header">
+                  <h3 class="product-name">${p.name}</h3>
+                  <span class="product-price">R$ ${priceFormatted}</span>
+                </div>
+                <p class="product-desc">${p.description || "Sem descrição."}</p>
+              </div>
             </div>
           `;
         });
 
-      menu.appendChild(div);
+      section.appendChild(grid);
+      menu.appendChild(section);
     });
   }
 
   // SELECT DO ADMIN
   if (categorySelect) {
     categorySelect.innerHTML = `
-      <option value="">Selecione uma categoria</option>
+      <option value="">Selecione uma categoria...</option>
       ${data.categories
         .map(c => `<option value="${c.id}">${c.name}</option>`)
         .join("")}
@@ -92,19 +106,12 @@ async function addCategory() {
 
 // ---------- ADICIONAR PRODUTO ----------
 async function addProduct() {
-  if (
-    !nameInput.value.trim() ||
-    !priceInput.value ||
-    !categorySelect.value
-  ) {
+  if (!nameInput.value.trim() || !priceInput.value || !categorySelect.value) {
     alert("Preencha todos os campos obrigatórios");
     return;
   }
 
-  // converte 12,34 -> 12.34
-  const formattedPrice = Number(
-    priceInput.value.replace(",", ".")
-  );
+  const formattedPrice = Number(priceInput.value.replace(",", "."));
 
   await fetch(`${API}/product?admin=${ADMIN_KEY}`, {
     method: "POST",

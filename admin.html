@@ -3,34 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin</title>
+<title>Admin - Café Fernandes</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <h1>Painel Administrativo - Café Fernandes</h1>
+  <h1>Painel Administrativo</h1>
 </header>
 
-<main class="admin">
+<main>
+  <div class="admin-container">
+    
+    <section class="admin-card">
+      <h2>Nova Categoria</h2>
+      <input id="cat" placeholder="Ex: Bebidas Quentes">
+      <button onclick="addCategory()">Criar Categoria</button>
+    </section>
 
-  <section class="card">
-    <h2>Nova Categoria</h2>
-    <input id="cat" placeholder="Nome da categoria">
-    <button onclick="addCategory()">Adicionar</button>
-  </section>
+    <section class="admin-card">
+      <h2>Novo Produto</h2>
+      <select id="category"></select>
+      <input id="name" placeholder="Nome do produto">
+      <input id="desc" placeholder="Descrição (opcional)">
+      <input id="price" placeholder="Preço (0,00)">
+      <button onclick="addProduct()">Cadastrar Produto</button>
+    </section>
 
-  <section class="card">
-    <h2>Novo Produto</h2>
-    <input id="name" placeholder="Nome do produto">
-    <input id="desc" placeholder="Descrição">
-    <input id="price" placeholder="Preço">
-    <select id="category"></select>
-    <button onclick="addProduct()">Adicionar</button>
-  </section>
-
-  <div id="menu"></div>
-
+    <div id="menu" class="full-width"></div>
+  </div>
 </main>
 
 <script src="script.js"></script>

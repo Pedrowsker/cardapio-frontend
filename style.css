@@ -1,138 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
 :root {
-  --brown-dark: #351f1f;
-  --brown: #7a4a2e;
-  --brown-light: #c4a484;
-  --bg: #ffffff;
-  --bg-soft: #f7f5f3;
-  --border: #e6e1dc;
-  --bt: #493131;
+  --primary: #5D4037;       /* Marrom café forte */
+  --secondary: #8D6E63;     /* Marrom médio */
+  --accent: #D7CCC8;        /* Bege suave */
+  --bg-body: #FDFBF7;       /* Branco "casca de ovo" */
+  --bg-card: #FFFFFF;
+  --text-main: #3E2723;
+  --text-light: #795548;
+  
+  --shadow-sm: 0 2px 8px rgba(93, 64, 55, 0.08);
+  --shadow-md: 0 8px 24px rgba(93, 64, 55, 0.12);
+  --radius: 16px;           /* Arredondamento mais moderno */
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Remove o azul ao tocar no mobile */
 }
 
 body {
-  margin: 0;
-  font-family: "Inter", Arial, sans-serif;
-  background: var(--bg-soft);
-  color: var(--brown-dark);
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.5;
+  font-size: 16px; /* Tamanho base bom para leitura */
 }
 
+/* ===== CABEÇALHO ===== */
 header {
-  background: var(--brown); /* marrom escuro */
-  color: white; /* texto branco para contraste */
-  border-bottom: 1px solid var(--border);
-  padding: 25px;
+  background: var(--bg-card);
+  padding: 1.5rem 1rem;
   text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: sticky; /* O menu fica fixo no topo ao rolar? Opcional. Se não quiser, tire sticky e top */
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--primary);
 }
-
 
 h1 {
-  margin: 0;
-  font-size: 2.2rem;
-  letter-spacing: 0.5px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; /* Levemente menor para caber em cel */
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
+header p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* ===== LAYOUT GERAL ===== */
 main {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px 80px 20px;
 }
 
-/* ===== CARDÁPIO ===== */
-
-.category {
-  margin-bottom: 40px;
+/* ===== CATEGORIAS ===== */
+.category-section {
+  margin-bottom: 2.5rem;
 }
 
-.category h2 {
-  border-left: 5px solid var(--brown);
+.category-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--primary);
+  border-left: 4px solid var(--secondary);
   padding-left: 12px;
-  font-size: 1.4rem;
-  margin-bottom: 15px;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
 }
 
-.product {
-  background: var(--bg);
-  padding: 15px 18px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  margin-bottom: 10px;
+/* ===== GRID DE PRODUTOS ===== */
+.products-grid {
+  display: grid;
+  /* Responsividade mágica: cria colunas de no mínimo 280px. 
+     Se a tela for menor, vira 1 coluna automaticamente */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.03);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.product:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+.product-card:active {
+  transform: scale(0.98); /* Efeito tátil ao clicar no celular */
 }
 
-.product b {
-  font-size: 1.05rem;
+@media (hover: hover) {
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+  }
 }
 
-/* ===== ADMIN ===== */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  gap: 10px;
+}
 
-.admin {
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.product-price {
+  font-weight: 600;
+  color: var(--bg-card);
+  background: var(--primary); /* Preço em destaque */
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(93, 64, 55, 0.2);
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: auto; /* Empurra descrição para baixo se o card for alto */
+}
+
+/* ===== ADMIN PAINEL ===== */
+.admin-container {
   display: grid;
   gap: 25px;
+  grid-template-columns: 1fr; /* Padrão mobile: 1 coluna */
 }
 
-.card {
-  background: var(--brown); /* marrom escuro */
-  color: white; /* texto branco */
-  border-radius: 16px;
+/* Só vira 2 colunas se a tela for maior que 768px (Tablet/PC) */
+@media(min-width: 768px) {
+  .admin-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.admin-card {
+  background: var(--bg-card);
   padding: 20px;
-  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border-top: 5px solid var(--secondary);
 }
 
-.card h2 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  color: white; /* garante que o título apareça */
+.admin-card h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  font-size: 1.3rem;
 }
 
-
-input,
-select {
+/* ===== INPUTS E BOTÕES (Otimizados para Dedos) ===== */
+input, select {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  font-size: 0.95rem;
-  background: var(--bg-soft); /* mantém inputs claros dentro do card escuro */
-  color: var(--brown-dark);   /* texto escuro dentro dos inputs */
+  padding: 16px; /* Mais alto para facilitar o toque */
+  margin-bottom: 15px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; /* 16px previne zoom automático no iPhone */
+  background: #FAFAFA;
+  appearance: none; /* Remove estilo padrão feio do sistema */
 }
 
-input:focus,
-select:focus {
+input:focus, select:focus {
   outline: none;
-  border-color: var(--brown);
+  border-color: var(--primary);
+  background: #FFF;
+  box-shadow: 0 0 0 4px rgba(93, 64, 55, 0.1);
 }
 
 button {
   width: 100%;
-  padding: 12px;
-  background: var(--brown-dark);
+  padding: 16px; /* Botão alto e clicável */
+  background: var(--primary);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  letter-spacing: 0.5px;
+  /* Sombra para dar destaque */
+  box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
 }
 
-button:hover {
-  background: var(--bt);
-  transform: translateY(-1px);
+button:active {
+  background: var(--text-main);
+  transform: scale(0.98);
 }
 
-/* ===== RESPONSIVO ===== */
-
+/* ===== AJUSTES FINAIS PARA CELULAR (MEDIA QUERIES) ===== */
 @media (max-width: 600px) {
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+  }
+  
+  header {
+    padding: 1.2rem;
+  }
+
+  main {
+    padding: 20px 15px 60px 15px; /* Margens laterais menores no celular */
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr; /* Garante 1 coluna total no mobile */
+  }
+
+  .product-card {
+    padding: 18px;
+  }
+  
+  .category-title {
+    font-size: 1.4rem;
   }
 }
