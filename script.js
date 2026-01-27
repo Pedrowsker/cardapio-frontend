@@ -38,54 +38,60 @@ function render(data) {
 
   menu.innerHTML = "";
 
-  const isAdmin = ADMIN_KEY === "admin123"; // 👈 verifica se é admin
-
   data.categories.forEach(c => {
-    const div = document.createElement("div");
-    div.className = "category";
+    const categoryDiv = document.createElement("div");
+    categoryDiv.className = "category";
 
-    div.innerHTML = `
-      <h2>
-        ${c.name}
-        ${isAdmin ? `<button onclick="deleteCategory(${c.id})">🗑</button>` : ""}
-      </h2>
+    const header = document.createElement("div");
+    header.className = "category-header";
+
+    header.innerHTML = `
+      <h2>${c.name}</h2>
+      ${ADMIN_KEY ? `<button class="delete-btn" onclick="deleteCategory(${c.id})">Excluir</button>` : ""}
     `;
+
+    const productsDiv = document.createElement("div");
+    productsDiv.className = "products";
 
     data.products
-  .filter(p => p.category_id === c.id)
-  .forEach(p => {
-    div.innerHTML += `
-      <div class="product">
-        <div>
-          <b>${p.name}</b><br>
-          ${p.description || ""}
-        </div>
-        <span class="price">
-          R$ ${Number(p.price).toFixed(2).replace(".", ",")}
-        </span>
-        ${
-          isAdmin
-            ? `<button onclick="deleteProduct(${p.id})">🗑</button>`
-            : ""
-        }
-      </div>
-    `;
+      .filter(p => p.category_id === c.id)
+      .forEach(p => {
+        const prod = document.createElement("div");
+        prod.className = "product";
+
+        prod.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <b>${p.name}</b><br>
+              ${p.description || ""}<br>
+              R$ ${Number(p.price).toFixed(2).replace(".", ",")}
+            </div>
+            ${ADMIN_KEY ? `<button class="delete-btn" onclick="deleteProduct(${p.id})">X</button>` : ""}
+          </div>
+        `;
+
+        productsDiv.appendChild(prod);
+      });
+
+    // abre/fecha ao clicar na categoria
+    header.addEventListener("click", () => {
+      const isOpen = productsDiv.style.display === "block";
+      productsDiv.style.display = isOpen ? "none" : "block";
+    });
+
+    categoryDiv.appendChild(header);
+    categoryDiv.appendChild(productsDiv);
+    menu.appendChild(categoryDiv);
   });
 
-
-    menu.appendChild(div);
-  });
-
-  // select do admin
   if (categorySelect) {
     categorySelect.innerHTML = `
       <option value="">Selecione uma categoria</option>
-      ${data.categories
-        .map(c => `<option value="${c.id}">${c.name}</option>`)
-        .join("")}
+      ${data.categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("")}
     `;
   }
 }
+
 
 
 /* ---------- ADICIONAR CATEGORIA ---------- */

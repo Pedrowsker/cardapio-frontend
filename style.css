@@ -139,6 +139,35 @@ button:hover {
   transform: translateY(-1px);
 }
 
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #b3261e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  width: auto;
+}
+
+.delete-btn:hover {
+  background: #8c1d18;
+}
+
+.products {
+  margin-top: 10px;
+  display: none;
+}
+
+
+
 /* ===== RESPONSIVO ===== */
 
 @media (max-width: 600px) {
