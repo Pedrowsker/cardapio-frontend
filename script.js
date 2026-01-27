@@ -33,47 +33,55 @@ async function loadMenu() {
 
 /* ---------- RENDER ---------- */
 function render(data) {
-  menuDiv.innerHTML = "";
+  const menu = document.getElementById("menu");
+  if (!menu) return;
+
+  menu.innerHTML = "";
+
+  const isAdmin = ADMIN_KEY === "admin123"; // 👈 verifica se é admin
 
   data.categories.forEach(c => {
-    const catBox = document.createElement("div");
-    catBox.className = "category";
+    const div = document.createElement("div");
+    div.className = "category";
 
-    catBox.innerHTML = `
+    div.innerHTML = `
       <h2>
         ${c.name}
-        <button onclick="deleteCategory(${c.id})" style="margin-left:10px;background:#b33">Excluir</button>
+        ${isAdmin ? `<button onclick="deleteCategory(${c.id})">🗑</button>` : ""}
       </h2>
     `;
 
     data.products
       .filter(p => p.category_id === c.id)
       .forEach(p => {
-        const prod = document.createElement("div");
-        prod.className = "product";
-        prod.innerHTML = `
-          <b>${p.name}</b><br>
-          ${p.description || ""}<br>
-          R$ ${Number(p.price).toFixed(2).replace(".", ",")}
-          <br>
-          <button onclick="deleteProduct(${p.id})" style="margin-top:6px;background:#b33">
-            Excluir Produto
-          </button>
+        div.innerHTML += `
+          <div class="product">
+            <b>${p.name}</b><br>
+            ${p.description || ""}<br>
+            R$ ${Number(p.price).toFixed(2).replace(".", ",")}
+            ${
+              isAdmin
+                ? `<button onclick="deleteProduct(${p.id})">🗑</button>`
+                : ""
+            }
+          </div>
         `;
-        catBox.appendChild(prod);
       });
 
-    menuDiv.appendChild(catBox);
+    menu.appendChild(div);
   });
 
-  // SELECT
+  // select do admin
   if (categorySelect) {
     categorySelect.innerHTML = `
       <option value="">Selecione uma categoria</option>
-      ${data.categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("")}
+      ${data.categories
+        .map(c => `<option value="${c.id}">${c.name}</option>`)
+        .join("")}
     `;
   }
 }
+
 
 /* ---------- ADICIONAR CATEGORIA ---------- */
 async function addCategory() {
