@@ -152,3 +152,6 @@ async function deleteCategory(id) {
 
 /* ---------- INIT ---------- */
 loadMenu();
+
+// atualiza o cardápio automaticamente a cada 5 segundos
+setInterval(loadMenu, 5000);
