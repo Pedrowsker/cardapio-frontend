@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Lato:wght@300;400;700&family=Montserrat:wght@300;500;700&display=swap');
 
 :root {
   --primary: #5D4037;       /* Marrom café forte */
@@ -9,84 +9,73 @@
   --text-main: #3E2723;
   --text-light: #795548;
   
-  --shadow-sm: 0 2px 8px rgba(93, 64, 55, 0.36);
-  --shadow-md: 0 8px 24px rgba(93, 64, 55, 0.12);
-  --radius: 16px;           /* Arredondamento mais moderno */
+  --shadow-sm: 0 4px 12px rgba(93, 64, 55, 0.1);
+  --shadow-md: 0 8px 24px rgba(93, 64, 55, 0.15);
+  --radius: 16px;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent; /* Remove o azul ao tocar no mobile */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lato', sans-serif; /* Fonte base para leitura */
   background-color: var(--bg-body);
   color: var(--text-main);
-  line-height: 1.5;
-  font-size: 16px; /* Tamanho base bom para leitura */
+  line-height: 1.6;
+  font-size: 16px;
 }
 
-/* ===== CABEÇALHO ===== */
-/* ===== AJUSTE DO HEADER PARA LOGO ===== */
+/* ===== CABEÇALHO (HEADER) ===== */
 header {
   background: var(--primary);
-  padding: 1rem 1.5rem; /* Reduzi um pouco o padding vertical */
+  padding: 1rem 1.5rem;
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 3px solid var(--primary);
+  border-bottom: 3px solid var(--secondary);
 }
 
 .header-content {
-  max-width: 1000px; /* Alinha com a largura do 'main' */
+  max-width: 1000px;
   margin: 0 auto;
   display: flex;
-  align-items: center; /* Centraliza verticalmente logo e texto */
-  gap: 20px;           /* Espaço entre a logo e o texto */
+  align-items: center;
+  gap: 18px;
 }
 
 .logo {
-  height: 60px;        /* Altura da logo - ajuste conforme necessário */
-  width: auto;         /* Mantém a proporção */
+  height: 60px;
+  width: auto;
   object-fit: contain;
-  border-radius: 8px;  /* Opcional: arredonda cantos da logo se for quadrada */
+  border-radius: 8px;
 }
 
 .header-text {
-  text-align: left;    /* Garante que o texto fique alinhado à esquerda */
+  text-align: left;
 }
 
 h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;   /* Reduzi um pouco para não brigar com a logo */
-  color: var(--bg-card);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  color: #FFFFFF;
   margin: 0;
-  line-height: 1.1;
+  line-height: 1;
+  font-weight: 700;
 }
 
 header p {
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
-  font-size: 0.85rem;
-  color: var(--text-light);
-}
-
-/* Ajuste para Celulares */
-@media (max-width: 600px) {
-  .header-content {
-    gap: 12px;
-  }
-  
-  .logo {
-    height: 50px;      /* Logo um pouco menor no celular */
-  }
-
-  h1 {
-    font-size: 1.4rem;
-  }
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  font-weight: 500;
 }
 
 /* ===== LAYOUT GERAL ===== */
@@ -96,51 +85,31 @@ main {
   padding: 30px 20px 80px 20px;
 }
 
-/* ===== CATEGORIAS ===== */
-/* ===== CATEGORIAS ===== */
+/* ===== CATEGORIAS (BANNERS) ===== */
 .category-section {
-  margin-bottom: 3.5rem; /* Mais espaço entre uma categoria e outra */
-  position: relative;
+  margin-bottom: 3.5rem;
 }
 
 .category-title {
-  /* Design de Banner */
-  background: var(--primary);  /* Fundo Marrom Café */
-  color: #FFFFFF;              /* Texto Branco para contraste total */
-  
-  /* Tipografia */
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;           /* Tamanho grande */
-  font-weight: 700;            /* Negrito */
-  letter-spacing: 1.5px;       /* Espaçamento chique entre letras */
-  text-transform: uppercase;   /* Caixa alta para impor respeito */
-  text-align: center;          /* Centralizado */
-  
-  /* Espaçamento e Borda */
-  padding: 12px 20px;
-  border-radius: 4px;          /* Cantos levemente arredondados */
-  margin-bottom: 25px;         /* Espaço entre o título e os produtos */
-  
-  /* Sombra para dar profundidade (3D sutil) */
-  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.4);
-  
-  /* Detalhe visual opcional: Borda dourada/bege embaixo */
-  border-bottom: 3px solid var(--accent);
-}
-
-/* Ajuste para telas menores (Celular) */
-@media (max-width: 600px) {
-  .category-title {
-    font-size: 1.3rem; /* Um pouco menor no celular para não quebrar */
-    padding: 10px;
-  }
+  font-family: 'Montserrat', sans-serif;
+  background: var(--primary);
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-weight: bolder;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 16px 20px;
+  border-radius: 0px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 3px solid var(--secondary);
 }
 
 /* ===== GRID DE PRODUTOS ===== */
 .products-grid {
   display: grid;
-  /* Responsividade mágica: cria colunas de no mínimo 280px. 
-     Se a tela for menor, vira 1 coluna automaticamente */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
@@ -148,155 +117,134 @@ main {
 .product-card {
   background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 22px;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(0,0,0,0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.02);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.product-card:active {
-  transform: scale(0.98); /* Efeito tátil ao clicar no celular */
-}
-
-@media (hover: hover) {
-  .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent);
-  }
 }
 
 .product-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   gap: 10px;
 }
 
 .product-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
   line-height: 1.2;
 }
 
 .product-price {
-  font-weight: 600;
-  color: var(--bg-card);
-  background: var(--primary); /* Preço em destaque */
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.95rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: var(--secondary);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
   white-space: nowrap;
-  box-shadow: 0 2px 5px rgba(93, 64, 55, 0.2);
 }
 
 .product-desc {
+  font-family: 'Lato', sans-serif;
   font-size: 0.9rem;
+  font-weight: 300;
   color: var(--text-light);
-  margin-top: auto; /* Empurra descrição para baixo se o card for alto */
+  margin-top: 4px;
 }
 
 /* ===== ADMIN PAINEL ===== */
 .admin-container {
   display: grid;
   gap: 25px;
-  grid-template-columns: 1fr; /* Padrão mobile: 1 coluna */
+  grid-template-columns: 1fr;
 }
 
-/* Só vira 2 colunas se a tela for maior que 768px (Tablet/PC) */
 @media(min-width: 768px) {
-  .admin-container {
-    grid-template-columns: 1fr 1fr;
-  }
-  .full-width {
-    grid-column: 1 / -1;
-  }
+  .admin-container { grid-template-columns: 1fr 1fr; }
+  .full-width { grid-column: 1 / -1; }
 }
 
 .admin-card {
   background: var(--bg-card);
-  padding: 20px;
+  padding: 25px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   border-top: 5px solid var(--secondary);
 }
 
 .admin-card h2 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
   color: var(--primary);
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
-/* ===== INPUTS E BOTÕES (Otimizados para Dedos) ===== */
+/* ===== INPUTS E BOTÕES ===== */
 input, select {
   width: 100%;
-  padding: 16px; /* Mais alto para facilitar o toque */
+  padding: 16px;
   margin-bottom: 15px;
   border: 1px solid #E0E0E0;
-  border-radius: 12px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem; /* 16px previne zoom automático no iPhone */
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
   background: #FAFAFA;
-  appearance: none; /* Remove estilo padrão feio do sistema */
 }
 
 input:focus, select:focus {
   outline: none;
   border-color: var(--primary);
-  background: #FFF;
-  box-shadow: 0 0 0 4px rgba(93, 64, 55, 0.1);
+  box-shadow: 0 0 0 4px rgba(93, 64, 55, 0.05);
 }
 
 button {
   width: 100%;
-  padding: 16px; /* Botão alto e clicável */
+  padding: 16px;
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  letter-spacing: 0.5px;
-  /* Sombra para dar destaque */
-  box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
+  transition: all 0.2s;
 }
 
-button:active {
+button:hover {
   background: var(--text-main);
-  transform: scale(0.98);
+  transform: translateY(-2px);
 }
 
-/* ===== AJUSTES FINAIS PARA CELULAR (MEDIA QUERIES) ===== */
+/* ===== RESPONSIVIDADE (CELULAR) ===== */
 @media (max-width: 600px) {
-  h1 {
-    font-size: 1.7rem;
-  }
+  h1 { font-size: 1.6rem; }
   
-  header {
-    padding: 1.2rem;
-  }
+  .logo { height: 50px; }
 
-  main {
-    padding: 20px 15px 60px 15px; /* Margens laterais menores no celular */
-  }
+  header p { letter-spacing: 2px; font-size: 0.65rem; }
 
-  .products-grid {
-    grid-template-columns: 1fr; /* Garante 1 coluna total no mobile */
-  }
+  main { padding: 20px 15px 60px 15px; }
 
-  .product-card {
-    padding: 18px;
-  }
-  
+  .products-grid { grid-template-columns: 1fr; }
+
   .category-title {
-    font-size: 1.4rem;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    padding: 14px;
   }
 }
