@@ -63,8 +63,20 @@ function render(data) {
       });
 
     header.addEventListener("click", () => {
-      card.classList.toggle("open");
-    });
+  const isOpen = card.classList.contains("open");
+
+  document.querySelectorAll(".category-card").forEach(c => {
+    c.classList.remove("open");
+    const p = c.querySelector(".products");
+    if (p) p.style.height = "0px";
+  });
+
+  if (!isOpen) {
+    card.classList.add("open");
+    productsDiv.style.height = productsDiv.scrollHeight + "px";
+  }
+});
+
 
     card.appendChild(header);
     card.appendChild(productsDiv);

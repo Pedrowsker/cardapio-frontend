@@ -216,16 +216,12 @@ button:hover {
 
 /* área dos produtos (animação slide) */
 .products {
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height 0.35s ease;
+  transition: height 0.35s ease;
   padding: 0 18px;
 }
 
-.category-card.open .products {
-  max-height: 800px; /* espaço suficiente */
-  padding-bottom: 15px;
-}
 
 /* produto */
 .product {
