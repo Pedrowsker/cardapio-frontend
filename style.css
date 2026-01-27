@@ -8,9 +8,7 @@
   --bt: #493131;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -20,13 +18,12 @@ body {
 }
 
 header {
-  background: var(--brown); /* marrom escuro */
-  color: white; /* texto branco para contraste */
+  background: var(--brown);
+  color: white;
   border-bottom: 1px solid var(--border);
   padding: 25px;
   text-align: center;
 }
-
 
 h1 {
   margin: 0;
@@ -39,143 +36,6 @@ main {
   margin: 40px auto;
   padding: 0 20px;
 }
-
-/* ===== CARDÁPIO ===== */
-
-.category {
-  margin-bottom: 50px;
-}
-
-.category h2 {
-  font-size: 1.6rem;
-  margin-bottom: 18px;
-  border-bottom: 2px solid var(--brown-light);
-  padding-bottom: 6px;
-}
-
-.product {
-  background: white;
-  border-radius: 16px;
-  padding: 18px 20px;
-  margin-bottom: 12px;
-  border: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  transition: 0.2s ease;
-}
-
-.product:hover {
-  box-shadow: 0 10px 24px rgba(0,0,0,0.07);
-  transform: translateY(-2px);
-}
-
-.product b {
-  font-size: 1.1rem;
-  color: var(--brown-dark);
-}
-
-.product span.price {
-  font-weight: 600;
-  color: var(--brown);
-  white-space: nowrap;
-}
-
-/* ===== ADMIN ===== */
-
-.admin {
-  display: grid;
-  gap: 25px;
-}
-
-.card {
-  background: var(--brown); /* marrom escuro */
-  color: white; /* texto branco */
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid var(--border);
-}
-
-.card h2 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  color: white; /* garante que o título apareça */
-}
-
-
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  font-size: 0.95rem;
-  background: var(--bg-soft); /* mantém inputs claros dentro do card escuro */
-  color: var(--brown-dark);   /* texto escuro dentro dos inputs */
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: var(--brown);
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  background: var(--brown-dark);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-}
-
-button:hover {
-  background: var(--bt);
-  transform: translateY(-1px);
-}
-
-
-.category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.delete-btn {
-  background: #b3261e;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  width: auto;
-}
-
-.delete-btn:hover {
-  background: #8c1d18;
-}
-
-.products {
-  margin-top: 10px;
-  display: none;
-}
-
-
-
-/* ===== RESPONSIVO ===== */
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-}
-
 
 /* ===== CARD CATEGORIA (ACCORDION) ===== */
 
@@ -203,7 +63,6 @@ button:hover {
   background: var(--bg-soft);
 }
 
-/* setinha */
 .category-header::after {
   content: "▾";
   font-size: 1rem;
@@ -214,14 +73,13 @@ button:hover {
   transform: rotate(180deg);
 }
 
-/* área dos produtos (animação slide) */
+/* área dos produtos — AQUI É O PULO DO GATO */
 .products {
   height: 0;
   overflow: hidden;
   transition: height 0.35s ease;
   padding: 0 18px;
 }
-
 
 /* produto */
 .product {
@@ -231,4 +89,79 @@ button:hover {
   border: 1px solid var(--border);
   margin-top: 10px;
   font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.product b {
+  font-size: 1.05rem;
+}
+
+.product span.price {
+  font-weight: 600;
+  color: var(--brown);
+  white-space: nowrap;
+}
+
+/* ===== ADMIN ===== */
+
+.admin { display: grid; gap: 25px; }
+
+.card {
+  background: var(--brown);
+  color: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.card h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: white;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  background: var(--bg-soft);
+  color: var(--brown-dark);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: var(--brown-dark);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: var(--bt);
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: #b3261e;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  width: auto;
+}
+
+.delete-btn:hover { background: #8c1d18; }
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.8rem; }
 }
