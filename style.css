@@ -30,9 +30,11 @@ body {
 }
 
 /* ===== CABEÇALHO (HEADER) ===== */
+/* ===== AJUSTE DO HEADER CENTRALIZADO ===== */
+/* ===== AJUSTE DO HEADER (CONJUNTO CENTRALIZADO) ===== */
 header {
   background: var(--primary);
-  padding: 1rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
@@ -44,19 +46,23 @@ header {
   max-width: 1000px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 18px;
+  flex-direction: row;    /* Logo e Texto lado a lado */
+  align-items: center;    /* Alinhamento vertical central */
+  justify-content: center; /* CENTRALIZA O CONJUNTO NO MEIO DA TELA */
+  gap: 20px;              /* Espaço entre a logo e o texto */
 }
 
 .logo {
-  height: 60px;
+  height: 65px;           /* Tamanho elegante para a logo */
   width: auto;
   object-fit: contain;
   border-radius: 8px;
 }
 
 .header-text {
-  text-align: left;
+  text-align: left;       /* O texto em si continua alinhado à esquerda da logo */
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -66,16 +72,42 @@ h1 {
   margin: 0;
   line-height: 1;
   font-weight: 700;
+  /* Aplicando o mesmo "bold reforçado" que usamos nos produtos para consistência */
+  text-shadow: 0.3px 0 0 #FFFFFF; 
 }
 
 header p {
   font-family: 'Montserrat', sans-serif;
-  margin: 0;
+  margin: 4px 0 0 0;
   font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   color: var(--accent);
   font-weight: 500;
+}
+
+/* Ajuste para Celulares */
+@media (max-width: 600px) {
+  header {
+    padding: 1rem;
+  }
+
+  .header-content {
+    gap: 12px;           /* Diminui o espaço entre logo e texto no celular */
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    letter-spacing: 2px;
+    font-size: 0.6rem;
+  }
 }
 
 /* ===== LAYOUT GERAL ===== */
@@ -136,11 +168,15 @@ main {
 
 .product-name {
   font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-style: italic;         /* Mudamos para normal para ganhar peso visual */
+  font-size: 1.6rem;          /* Aumentamos levemente o tamanho */
+  font-weight: 700;           /* Peso máximo da Cormorant */
   color: var(--primary);
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.5px;     /* Aproxima as letras para parecerem mais densas/fortes */
+  
+  /* Truque para engrossar a fonte (Stroke simulado) */
+  text-shadow: 0.3px 0 0 var(--primary), -0.1px 0 0 var(--primary);
 }
 
 .product-price {
