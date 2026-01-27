@@ -52,21 +52,26 @@ function render(data) {
     `;
 
     data.products
-      .filter(p => p.category_id === c.id)
-      .forEach(p => {
-        div.innerHTML += `
-          <div class="product">
-            <b>${p.name}</b><br>
-            ${p.description || ""}<br>
-            R$ ${Number(p.price).toFixed(2).replace(".", ",")}
-            ${
-              isAdmin
-                ? `<button onclick="deleteProduct(${p.id})">🗑</button>`
-                : ""
-            }
-          </div>
-        `;
-      });
+  .filter(p => p.category_id === c.id)
+  .forEach(p => {
+    div.innerHTML += `
+      <div class="product">
+        <div>
+          <b>${p.name}</b><br>
+          ${p.description || ""}
+        </div>
+        <span class="price">
+          R$ ${Number(p.price).toFixed(2).replace(".", ",")}
+        </span>
+        ${
+          isAdmin
+            ? `<button onclick="deleteProduct(${p.id})">🗑</button>`
+            : ""
+        }
+      </div>
+    `;
+  });
+
 
     menu.appendChild(div);
   });

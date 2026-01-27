@@ -43,32 +43,42 @@ main {
 /* ===== CARDÁPIO ===== */
 
 .category {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .category h2 {
-  border-left: 5px solid var(--brown);
-  padding-left: 12px;
-  font-size: 1.4rem;
-  margin-bottom: 15px;
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--brown-light);
+  padding-bottom: 6px;
 }
 
 .product {
-  background: var(--bg);
-  padding: 15px 18px;
-  border-radius: 14px;
+  background: white;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
   border: 1px solid var(--border);
-  margin-bottom: 10px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: 0.2s ease;
 }
 
 .product:hover {
+  box-shadow: 0 10px 24px rgba(0,0,0,0.07);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
 .product b {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+  color: var(--brown-dark);
+}
+
+.product span.price {
+  font-weight: 600;
+  color: var(--brown);
+  white-space: nowrap;
 }
 
 /* ===== ADMIN ===== */
