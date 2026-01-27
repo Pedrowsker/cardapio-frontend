@@ -89,20 +89,20 @@ main {
 }
 
 .card {
-  background: var(--brown-dark); /* marrom escuro */
-  color: white;
+  background: var(--brown); /* marrom escuro */
+  color: white; /* texto branco */
   border-radius: 16px;
   padding: 20px;
   border: 1px solid var(--border);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .card h2 {
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 1.2rem;
-  color: white;
+  color: white; /* garante que o título apareça */
 }
+
 
 input,
 select {
@@ -112,8 +112,8 @@ select {
   border-radius: 10px;
   border: 1px solid var(--border);
   font-size: 0.95rem;
-  background: var(--bg-soft);
-  color: var(--brown-dark);
+  background: var(--bg-soft); /* mantém inputs claros dentro do card escuro */
+  color: var(--brown-dark);   /* texto escuro dentro dos inputs */
 }
 
 input:focus,
@@ -122,11 +122,10 @@ select:focus {
   border-color: var(--brown);
 }
 
-/* BOTÕES PRINCIPAIS DO ADMIN */
-.card button {
+button {
   width: 100%;
   padding: 12px;
-  background: var(--brown);
+  background: var(--brown-dark);
   color: white;
   border: none;
   border-radius: 12px;
@@ -135,12 +134,12 @@ select:focus {
   transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.card button:hover {
-  background: var(--brown-light);
+button:hover {
+  background: var(--bt);
   transform: translateY(-1px);
 }
 
-/* HEADER DA CATEGORIA (COLAPSÁVEL) */
+
 .category-header {
   display: flex;
   justify-content: space-between;
@@ -148,7 +147,6 @@ select:focus {
   cursor: pointer;
 }
 
-/* BOTÃO DE EXCLUIR */
 .delete-btn {
   background: #b3261e;
   color: white;
@@ -163,12 +161,10 @@ select:focus {
   background: #8c1d18;
 }
 
-/* LISTA DE PRODUTOS ESCONDIDA ATÉ CLICAR */
 .products {
   margin-top: 10px;
   display: none;
 }
-
 
 
 
