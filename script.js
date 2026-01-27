@@ -1,13 +1,12 @@
 const API = "https://cardapio-backend-cytu.onrender.com";
 const ADMIN_KEY = new URLSearchParams(window.location.search).get("admin");
 
-// ELEMENTOS
+/* ---------- ELEMENTOS ---------- */
 const cat = document.getElementById("cat");
 const nameInput = document.getElementById("name");
 const descInput = document.getElementById("desc");
 const priceInput = document.getElementById("price");
 const categorySelect = document.getElementById("category");
-const menuDiv = document.getElementById("menu");
 
 /* ---------- FORMATAÇÃO DO PREÇO ---------- */
 if (priceInput) {
@@ -37,40 +36,43 @@ function render(data) {
   if (!menu) return;
 
   menu.innerHTML = "";
+  const isAdmin = ADMIN_KEY === "admin123";
 
-  const categories = data.categories || [];
-  const products = data.products || [];
-
-  categories.forEach(c => {
+  (data.categories || []).forEach(c => {
     const card = document.createElement("div");
     card.className = "category-card";
 
     const header = document.createElement("div");
     header.className = "category-header";
-    header.textContent = c.name;
+    header.innerHTML = `
+      <span>${c.name}</span>
+      ${isAdmin ? `<button class="delete-btn" onclick="deleteCategory(${c.id})">🗑</button>` : ""}
+    `;
 
     const productsDiv = document.createElement("div");
     productsDiv.className = "products";
 
-    const relatedProducts = products.filter(p => Number(p.category_id) === Number(c.id));
-
-    if (relatedProducts.length === 0) {
-      productsDiv.innerHTML = `<div class="product">Nenhum produto</div>`;
-    } else {
-      relatedProducts.forEach(p => {
+    (data.products || [])
+      .filter(p => Number(p.category_id) === Number(c.id))
+      .forEach(p => {
         const prod = document.createElement("div");
         prod.className = "product";
         prod.innerHTML = `
-          <b>${p.name}</b><br>
-          ${p.description || ""}<br>
-          R$ ${Number(p.price).toFixed(2).replace(".", ",")}
+          <div>
+            <b>${p.name}</b><br>
+            ${p.description || ""}
+          </div>
+          <span class="price">R$ ${Number(p.price).toFixed(2).replace(".", ",")}</span>
+          ${isAdmin ? `<button class="delete-btn" onclick="deleteProduct(${p.id})">🗑</button>` : ""}
         `;
         productsDiv.appendChild(prod);
       });
-    }
 
-    header.addEventListener("click", () => {
+    header.addEventListener("click", e => {
+      if (e.target.tagName === "BUTTON") return;
+
       const open = card.classList.contains("open");
+
       document.querySelectorAll(".products").forEach(el => el.style.height = "0px");
       document.querySelectorAll(".category-card").forEach(el => el.classList.remove("open"));
 
@@ -88,13 +90,12 @@ function render(data) {
   if (categorySelect) {
     categorySelect.innerHTML = `
       <option value="">Selecione uma categoria</option>
-      ${categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("")}
+      ${(data.categories || [])
+        .map(c => `<option value="${c.id}">${c.name}</option>`)
+        .join("")}
     `;
   }
 }
-
-
-
 
 /* ---------- ADICIONAR CATEGORIA ---------- */
 async function addCategory() {
@@ -158,8 +159,6 @@ async function deleteCategory(id) {
   loadMenu();
 }
 
-/* ---------- INIT ---------- */
+/* ---------- AUTO ATUALIZAÇÃO ---------- */
 loadMenu();
-
-// atualiza o cardápio automaticamente a cada 5 segundos
 setInterval(loadMenu, 5000);
