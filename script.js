@@ -38,7 +38,10 @@ function render(data) {
 
   menu.innerHTML = "";
 
-  data.categories.forEach(c => {
+  const categories = data.categories || [];
+  const products = data.products || [];
+
+  categories.forEach(c => {
     const card = document.createElement("div");
     card.className = "category-card";
 
@@ -49,9 +52,12 @@ function render(data) {
     const productsDiv = document.createElement("div");
     productsDiv.className = "products";
 
-    data.products
-      .filter(p => p.category_id === c.id)
-      .forEach(p => {
+    const relatedProducts = products.filter(p => Number(p.category_id) === Number(c.id));
+
+    if (relatedProducts.length === 0) {
+      productsDiv.innerHTML = `<div class="product">Nenhum produto</div>`;
+    } else {
+      relatedProducts.forEach(p => {
         const prod = document.createElement("div");
         prod.className = "product";
         prod.innerHTML = `
@@ -61,22 +67,18 @@ function render(data) {
         `;
         productsDiv.appendChild(prod);
       });
+    }
 
     header.addEventListener("click", () => {
-  const isOpen = card.classList.contains("open");
+      const open = card.classList.contains("open");
+      document.querySelectorAll(".products").forEach(el => el.style.height = "0px");
+      document.querySelectorAll(".category-card").forEach(el => el.classList.remove("open"));
 
-  document.querySelectorAll(".category-card").forEach(c => {
-    c.classList.remove("open");
-    const p = c.querySelector(".products");
-    if (p) p.style.height = "0px";
-  });
-
-  if (!isOpen) {
-    card.classList.add("open");
-    productsDiv.style.height = productsDiv.scrollHeight + "px";
-  }
-});
-
+      if (!open) {
+        card.classList.add("open");
+        productsDiv.style.height = productsDiv.scrollHeight + "px";
+      }
+    });
 
     card.appendChild(header);
     card.appendChild(productsDiv);
@@ -86,9 +88,7 @@ function render(data) {
   if (categorySelect) {
     categorySelect.innerHTML = `
       <option value="">Selecione uma categoria</option>
-      ${data.categories.map(c =>
-        `<option value="${c.id}">${c.name}</option>`
-      ).join("")}
+      ${categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("")}
     `;
   }
 }
