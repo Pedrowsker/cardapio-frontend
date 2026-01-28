@@ -82,7 +82,7 @@ function render(data) {
                 <h3 class="product-name">${p.name}</h3>
                 <span class="product-price">R$ ${priceFormatted}</span>
               </div>
-              <p class="product-desc">${p.description || "Sem descrição."}</p>
+              <p class="product-desc">${p.description || ""}</p>
             </div>
           `;
         });
