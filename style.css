@@ -126,14 +126,15 @@ main {
   font-family: 'Montserrat', sans-serif;
   background: var(--primary);
   color: #FFFFFF;
-  font-size: 1.1rem;
-  font-weight: bolder;
+  font-size: 1.6rem;
+  font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
   text-align: center;
   padding: 16px 20px;
   border-radius: 0px;
-  margin-bottom: 25px;
+  margin-bottom: 20px; /* Reduzi um pouco */
+  width: 100%;         /* Garante que o banner ocupe a largura toda */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 3px solid var(--secondary);
@@ -151,7 +152,7 @@ main {
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(0,0,0,0.02);
+  border: 1px solid rgba(59, 40, 6, 0.234);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -169,7 +170,7 @@ main {
 .product-name {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;         /* Mudamos para normal para ganhar peso visual */
-  font-size: 1.7rem;          /* Aumentamos levemente o tamanho */
+  font-size: 1.6rem;          /* Aumentamos levemente o tamanho */
   font-weight: 700;           /* Peso máximo da Cormorant */
   color: var(--primary);
   line-height: 1.1;
@@ -183,7 +184,7 @@ main {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   color: #FFFFFF;
-  background: var(--secondary);
+  background: var(--primary);
   padding: 5px 12px;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -192,7 +193,7 @@ main {
 
 .product-desc {
   font-family: 'Lato', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   font-weight: 300;
   color: var(--text-light);
   margin-top: 4px;
@@ -283,4 +284,61 @@ button:hover {
     letter-spacing: 3px;
     padding: 14px;
   }
+}
+
+/* Container para alinhar Título + Botão de Excluir Categoria */
+.category-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Botão de excluir CATEGORIA (Banner) */
+.delete-btn.cat-del {
+  background: #c0392b;
+  color: white;
+  padding: 6px 15px;
+  font-size: 11px;
+  width: auto;
+  margin-top: -15px; /* Sobe para "grudar" no banner */
+  margin-bottom: 25px;
+  border-radius: 4px;
+  opacity: 0.8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.delete-btn.cat-del:hover {
+  opacity: 1;
+  background: #e74c3c;
+  transform: translateY(-1px);
+}
+
+/* Botão de excluir PRODUTO (O "X" flutuante) */
+.product-card {
+  position: relative; /* CRUCIAL: para o X não fugir do card */
+}
+
+.delete-prod-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 28px !important; /* !important para garantir o tamanho */
+  height: 28px !important;
+  padding: 0 !important;
+  background: #c0392b !important;
+  color: white;
+  border-radius: 50% !important;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.delete-prod-btn:hover {
+  background: #e74c3c !important;
+  transform: scale(1.1);
 }
