@@ -29,13 +29,34 @@ if (priceInput) {
 
 // ---------- CARREGAR MENU ----------
 async function loadMenu() {
+  // Seleciona a tela de loading
+  const loadingScreen = document.getElementById("loading-screen");
+
   try {
     const res = await fetch(`${API}/menu`);
+    
     if (!res.ok) throw new Error("Erro ao carregar");
+    
     const data = await res.json();
+    
+    // Primeiro renderizamos os dados no HTML
     render(data);
+
+    // Só então escondemos a tela de loading (com um pequeno delay opcional se quiser)
+    if (loadingScreen) {
+      loadingScreen.classList.add("hidden");
+    }
+
   } catch (error) {
     console.error("Falha ao carregar o menu:", error);
+    
+    // Se der erro, escondemos o loading para o usuário ver a mensagem de erro ou o site vazio
+    if (loadingScreen) {
+      loadingScreen.classList.add("hidden");
+    }
+    
+    // Opcional: Avisar o usuário se o servidor demorar demais
+    // alert("O servidor está demorando para responder. Tente recarregar a página.");
   }
 }
 
